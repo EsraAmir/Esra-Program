@@ -1,0 +1,3 @@
+# Test Case: Addition of new art to the museum
+artwork1 = Artwork("The Starry Night", "Vincent van Gogh", "1889", "Oil on canvas", "Permanent Gallery")
+artwork1.display_info()
