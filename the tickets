@@ -1,1 +1,97 @@
-class tickets 
+import tkinter as tk
+from tkinter import Label, Entry, Button
+
+class Artwork:
+    def __init__(self, title, artist, date, significance):
+        self.title = title
+        self.artist = artist
+        self.date = date
+        self.significance = significance
+
+class Exhibition:
+    def __init__(self, artworks, location, duration):
+        self.artworks = artworks
+        self.location = location
+        self.duration = duration
+
+class Ticket:
+    def __init__(self, visitor, exhibition=None, event=None):
+        self.visitor = visitor
+        self.exhibition = exhibition
+        self.event = event
+
+class TicketPricing:
+    VAT_RATE = 0.05
+
+    @staticmethod
+    def calculate_price(visitor):
+        if visitor.age < 18 or visitor.age >= 60:
+            return 0  # Free ticket for children, seniors
+        elif visitor.age >= 18 and visitor.age <= 60:
+            return 63  # Default price for adults
+        else:
+            return 0  # Handle other cases
+
+    @staticmethod
+    def apply_vat(price):
+        return price + (price * TicketPricing.VAT_RATE)
+
+    @staticmethod
+    def calculate_discounted_price(price, discount):
+        return price * (1 - discount)
+
+class Event:
+    def __init__(self, name, location, duration, ticket_price):
+        self.name = name
+        self.location = location
+        self.duration = duration
+        self.ticket_price = ticket_price
+
+class Visitor:
+    def __init__(self, name, age, nationality):
+        self.name = name
+        self.age = age
+        self.nationality = nationality
+
+def calculate_ticket_price():
+    name = entry_name.get()
+    age = int(entry_age.get())
+    nationality = entry_nationality.get()
+    visitor = Visitor(name, age, nationality)
+
+    ticket_price = TicketPricing.calculate_price(visitor)
+    ticket_price_with_vat = TicketPricing.apply_vat(ticket_price)
+    ticket_price_label.config(text=f"Ticket Price: ${ticket_price_with_vat:.2f}")
+
+# Create the tkinter window
+root = tk.Tk()
+root.title("Art Museum Application")
+
+# Create labels, entries, and buttons
+label_name = Label(root, text="Visitor Name:")
+entry_name = Entry(root, width=20)
+
+label_age = Label(root, text="Visitor Age:")
+entry_age = Entry(root, width=20)
+
+label_nationality = Label(root, text="Visitor Nationality:")
+entry_nationality = Entry(root, width=20)
+
+submit_button = Button(root, text="Calculate Ticket Price", command=calculate_ticket_price)
+ticket_price_label = Label(root, text="Ticket Price: ")
+
+# Pack labels, entries, and buttons
+label_name.pack()
+entry_name.pack()
+
+label_age.pack()
+entry_age.pack()
+
+label_nationality.pack()
+entry_nationality.pack()
+
+submit_button.pack()
+ticket_price_label.pack()
+
+# Run the tkinter event loop
+root.mainloop()
