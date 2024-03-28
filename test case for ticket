@@ -1,0 +1,6 @@
+# Test Case: Purchase of tickets by an individual for an event
+visitor1 = Visitor("Alice", 30, "123456789")
+exhibition1 = Exhibition("Impressionist Exhibition", "Gallery 1", "2 months")
+ticket1 = Ticket("001", exhibition1, "Adult", 63.0)
+visitor1.purchase_ticket(ticket1)
+visitor1.display_receipts()
