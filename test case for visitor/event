@@ -1,0 +1,4 @@
+# Test Case: Opening of a new event at the museum
+event1 = Event("Classical Concert", "Outdoor Amphitheater", "3 hours", 100.0)
+event_ticket = Ticket("002", event1, "Adult", event1.ticket_price)
+event_ticket.display_receipt()
